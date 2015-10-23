@@ -1,0 +1,79 @@
+Uni: dz2276
+Name: Dasheng Zhang
+
+Homework 3
+
+-------------------------------------
+
+Problem 1:
+
+(a) Assume you start with an empty Binary Search Tree. Show the result of inserting
+3,7,2,8,9,4,5 into the tree (in this sequence). Is the tree balanced? If not, where
+is the balance condition violated?
+
+			3
+		  /	  \
+		2		7
+			  /   \
+			4		8
+			  \		  \
+				5		9
+
+The tree is not balanced.
+The root of the tree has a left subtree of height 0, but has a right subtree of height 2,
+which differ by 2 (more than 1).
+
+(b) Show the result of deleting the root of the tree from part (a) (using the convention for
+the deletion operation made in class).
+
+			4
+		  /	  \
+		2		7
+			  /   \
+			5		8
+			   		  \
+				 		9
+
+-------------------------------------
+
+Problem 2:
+
+Show the result of inserting 3,7,2,8,9,4,5 (in this sequence) into an initially empty AVL
+tree. You do not need to draw all intermediate trees, but please pecify which rotations are
+needed (if any) and around which node.
+
+			3
+		  /	  \
+		2		7
+			      \
+					8
+			   		  \
+				 		9
+
+insert(9) would violate the balance around node 7. Outside case. Single rotation is needed.
+
+			3
+		  /	  \
+		2		8
+			  /   \
+			7		9
+		  /
+		4
+
+insert(4) would violate the balance around node 3. Inside case. Double rotation is needed.
+
+			7
+		  /	  \
+		3		8
+	  /	  \	      \
+	2	   	4		9
+
+insert(5) would not violate the balance.
+
+			7
+		  /	  \
+		3		8
+	  /	  \	      \
+	2	    4		9
+			  \
+				5
