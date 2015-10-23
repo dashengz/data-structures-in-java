@@ -218,6 +218,139 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 	/********* ADD YOUR SOLUTIONS HERE *****************/
 
 	/**
+	 * Find the first occurrence of a given object, and return the index of it.
+	 *
+	 * @param o
+	 * 			the object that you want to locate
+	 * @return the index of the first occurrence of the element o;
+	 * or return -1 if the element is not found.
+	 */
+	public int indexOf(Object o) {
+		// local int index to represent the index of the element that's currently being compared to;
+		int index = 0;
+
+		// use if/else statement to find o
+		if (o != null) {
+			// when o is not null
+			// beginMarker.next because first data is always null
+			for (Node<T> n = beginMarker.next; n != null; n = n.next) {
+				if (o.equals(n.data)) {
+					return index;
+				}
+				index++;
+			}
+		} else {
+			// when o is null
+			// beginMarker.next because first data is always null
+			for (Node<T> n = beginMarker.next; n != null; n = n.next) {
+				if (n.data == null) {
+					return index;
+				}
+				index++;
+			}
+		}
+
+		// if the if/else statement cannot find o, then it means that o is not in the list or it is null
+		// return -1
+		return -1;
+	}
+
+	/**
+	 * Reverse the doubly linked list
+	 *
+	 * Add-on Question:
+	 * Maybe we can use a boolean variable to manage the direction the linked list should go.
+	 * If true then prev goes backward and next goes forward;
+	 * If false then next goes backward and prev goes forward.
+	 * Then the reverse() is used to change the value of the boolean variable.
+	 */
+	public void reverse() {
+		Node<T> node = beginMarker;
+		// swap the nodes throughout the list
+		while (node != null) {
+			// use temp to hold the value
+			Node<T> temp = node.prev;
+			node.prev = node.next;
+			node.next = temp;
+			node = node.prev;
+		}
+		// use temp to hold the value
+		Node<T> temp = endMarker;
+		endMarker = beginMarker;
+		beginMarker = temp;
+	}
+
+	/**
+	 * Remove the duplicates in an unsorted doubly linked list
+	 *
+	 * Add-on Question:
+	 * 1) O(N^2)
+	 * 2) Sorted List: we only need one node when comparing (one while loop),
+	 * since the duplicates would always be right after the original element;
+	 * just have one node comparing data with its next node's data (if/else in the while loop),
+	 * and keep doing node.next = node.next.next to skip the duplicates.
+	 */
+	public void removeDuplicates() {
+		// node current runs through the list
+		Node<T> current = beginMarker.next;
+		// node node compares every element with the current node
+		Node<T> node;
+		// first while loop increments current
+		while (current != null) {
+			node = current;
+			// second while loop increments node
+			while(node.next != null) {
+				if (current.data.equals(node.next.data)) {
+					node.next = node.next.next;
+				} else {
+					node = node.next;
+				}
+			}
+			current = current.next;
+		}
+	}
+
+	/**
+	 * Interleaves elements from the other list into the linked list
+	 * @param other
+	 * 			another SimpleLinkedList list object
+	 */
+	public void interleave(SimpleLinkedList<T> other) {
+		// create a new list to replace other so other would not be altered;
+		// not optimal at all but I haven't come up with a better plan yet...
+		// will change the code later, hopefully.
+		SimpleLinkedList<T> temp = new SimpleLinkedList<>();
+		for (int i = 0; i < other.size; i++) {
+			temp.add(other.get(i));
+		}
+		Node<T> nodeOne = beginMarker.next;
+		Node<T> nodeTwo = temp.beginMarker.next;
+		Node<T> nextTwo;
+
+		// when lst is longer than other
+		while (nodeOne.next != null && nodeTwo.next != null
+				&& nodeOne.next.data != null) {
+			nextTwo = nodeTwo.next;
+			nodeTwo.next = nodeOne.next;
+			nodeOne.next = nodeTwo;
+			nodeOne = nodeTwo.next;
+			nodeTwo = nextTwo;
+		}
+		// in case the list that's operated on is null
+		if (nodeOne.next == null) {
+			beginMarker = other.beginMarker;
+		}
+		// when other is longer than lst, then append
+		if (size <= other.size) {
+			nodeOne.next = nodeTwo;
+			while (nodeTwo.next != null) {
+				nodeTwo = nodeTwo.next;
+			}
+			endMarker = nodeTwo;
+		}
+	}
+	
+	/**
 	 * Obtains an Iterator object used to traverse the collection.
 	 * 
 	 * @return an iterator positioned prior to the first element.

@@ -1,0 +1,60 @@
+Uni: dz2276
+Name: Dasheng Zhang
+
+Homework 2
+
+-------------------------------------
+
+Problem 1: Comparing Growth Rates
+23N, 42N^3, 2^N, N^(1/2), 3^N, N^2, logN, 2/N, 128, NlogN, 2^(N+1), N!
+
+From slowest to fastest (< means slower and = means same rate):
+2/N < 128 < logN < N^(1/2) < 23N < NlogN < N^2 < 42N^3 < 2^N = 2^(N+1) < 3^N < N!
+
+-------------------------------------
+
+Problem 2: Running Time Analysis
+
+1)
+
+int sum = 0;
+for (int i = 0; i < n; i++)
+    for(int k = i; k < n; k++)
+        sum++;
+
+Based on general rule #1, the inner for loop's running time is the running time of sum++, which is O(1), times the number of iterations (n - i). So as the first loop iterates, when i = 0, the inner loop iterates n times; when i = 1, the inner loop iterates n - 1 times; ... ; when i = n - 1, the inner loop iterates 1 time; and then it stops. All together the running time should be 1/2 * [n + (n + 1)], which is O(N^2).
+
+2)
+
+int sum = 0;
+for (int i = 0; i < 23; i++)
+    for (int j = 0; j < n; j++)
+        sum++;
+
+Based on general rule #2, nested loops' running time is the running time of the statement, which are all O(1) here, multiplied by the product of the sizes of all the loops (first one is a constant, and then another one is n). So altogether the running time should be O(N).
+
+3)
+
+public int foo(int x,int k) {
+    if (x <= k)
+        return 1;
+    else
+        return foo(x / k, k) + 1;
+}
+
+First of all, k should be no less than 2 (Otherwise the program would not terminate).
+The method is basically doing divisions recursively on x using k, until x can no longer be divided. The relationship between the running time and x should be logarithmic, the running time should be O(logk(X)).
+
+-------------------------------------
+
+Problem 3: Re-arranging Train Cars
+
+1) input track: 5 8 1 7 4 2 9 6 3
+
+3 to S1 -> 6 to S2 -> 9 to S3 ->
+2 to S1 -> 4 to S2 -> 7 to S3 ->
+1 to Output -> 2 from S1 to Output -> 3 from S1 to Output -> 4 from S2 to Output
+8 to S1 ->
+5 to Output -> 6 from S2 to Output -> 7 from S3 to Output -> 8 from S1 to Output -> 9 from S3 to Output
+
+2) Three holding tracks are not enough. If 1 is put towards the back and 2 and 3 are put towards the front, 2 and 3 couldn't be the out put and have to be put in the holding tracks. But then since 1 is not output yet, 2 and 3 would be kept at the bottom of the stack, not allowing any car that has a larger number to be stored above them. So there's not a solution.
