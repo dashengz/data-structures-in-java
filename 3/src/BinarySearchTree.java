@@ -13,15 +13,23 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
   // feel free (and you probably should) add helper private methods
   // problem 3a
   public boolean isBst() {
-    return isBst(root, findMin(root).data, findMax(root).data);
+    return root == null
+            || isBSTLeft(root.left, root.data)
+            && isBstRight(root.right, root.data);
   }
 
-  private boolean isBst(BinaryNode<T> n, T less, T more) {
+  private boolean isBstRight(BinaryNode<T> n, T less) {
     return n == null
             || n.data.compareTo(less) > 0
-            && n.data.compareTo(more) < 0
-            && isBst(n.left, less, n.data)
-            && isBst(n.right, n.data, more);
+            && isBSTLeft(n.left,n.data)
+            && isBstRight(n.right, less);
+  }
+
+  private boolean isBSTLeft(BinaryNode<T> n, T more) {
+    return n == null
+            || n.data.compareTo(more) <= 0
+            && isBSTLeft(n.left, more)
+            && isBstRight(n.right, n.data);
   }
 
   // problem 3b
