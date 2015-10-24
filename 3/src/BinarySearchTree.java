@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Iterator;
 
@@ -34,7 +35,24 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
 
   // problem 3b
   public List<T> getInterval(T min, T max) {
-    return null;
+    List<T> intervalList = new LinkedList<>();
+    getInterval(min, max, root, intervalList);
+    return intervalList;
+  }
+
+  private void getInterval(T min, T max, BinaryNode<T> n, List<T> l) {
+    if (n == null) return;
+    int searchMin = n.data.compareTo(min);
+    int searchMax = n.data.compareTo(max);
+    if (searchMin > 0) {
+      getInterval(min, max, n.left, l);
+    }
+    if (searchMax < 0) {
+      getInterval(min, max, n.right, l);
+    }
+    if (searchMin >= 0 && searchMax <= 0) {
+      l.add(n.data);
+    }
   }
 
   // problem 3c
