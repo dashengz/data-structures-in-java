@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Trie {
@@ -48,7 +49,26 @@ public class Trie {
 
   // problem 4d
   public List<String> getStartsWith(String prefix) {
-    return null;
+    TrieNode node = root;
+    for (int i = 0; i < prefix.length(); i++)
+      node = node.children[prefix.charAt(i) - 'a'];
+    if (node == null)
+      return new ArrayList<>();
+
+    return getStartsWith(node);
+  }
+
+  private List<String> getStartsWith(TrieNode n) {
+    List<String> ls = new ArrayList<>();
+    if (!n.endOfWord)
+      ls.add(n.toString());
+    if (n.children != null) {
+      for (int i = 0; i < n.children.length; i++) {
+        if (n.children[i] != null)
+          ls.addAll(getStartsWith(n.children[i]));
+      }
+    }
+    return ls;
   }
 
   public String toString() {
@@ -98,6 +118,9 @@ public class Trie {
     System.out.println(trie.contains("dog"));
     System.out.println(trie.contains("do"));
     System.out.println(trie.contains("doc"));
-    System.out.println(trie.getStartsWith("hell"));
+    System.out.println(trie.contains(""));
+    trie.getStrings();
+
+    System.out.println(trie.getStartsWith("doc"));
   }
 }
