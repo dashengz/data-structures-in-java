@@ -29,7 +29,16 @@ public class Trie {
 
   // problem 4b
   public boolean contains(String word) {
-    return false;
+    char[] letters = word.toCharArray();
+    TrieNode node = root;
+    for (int i = 0; i < word.length(); i++) {
+      if (node == null)
+        return false;
+      node = node.children[letters[i] - 'a'];
+    }
+    if (node != null && !node.endOfWord)
+      return false;
+    return true;
   }
 
   // problem 4c
@@ -84,7 +93,11 @@ public class Trie {
     trie.addWord("doll");
     trie.addWord("dock");
     trie.addWord("doctor");
+
     System.out.println(trie);
-//    System.out.println(trie.getStartsWith("hell"));
+    System.out.println(trie.contains("dog"));
+    System.out.println(trie.contains("do"));
+    System.out.println(trie.contains("doc"));
+    System.out.println(trie.getStartsWith("hell"));
   }
 }
