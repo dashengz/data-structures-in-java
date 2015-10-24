@@ -44,7 +44,7 @@ public class Trie {
 
   // problem 4c
   public List<String> getStrings() {
-    return null;
+    return getStartsWith(root);
   }
 
   // problem 4d
