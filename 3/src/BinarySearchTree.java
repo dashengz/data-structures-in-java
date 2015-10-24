@@ -69,16 +69,16 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
   }
 
   private class PostOrderIterator implements Iterator<T> {
-    Deque<PostOrder> deque;
+    Stack<PostOrder> stack;
 
     PostOrderIterator() {
-      deque = new ArrayDeque<>();
-      deque.add(new PostOrder(root));
+      stack = new Stack<>();
+      stack.add(new PostOrder(root));
     }
 
     @Override
     public boolean hasNext() {
-      return !deque.isEmpty();
+      return !stack.isEmpty();
     }
 
     @Override
@@ -87,16 +87,16 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
         throw new NoSuchElementException();
 
       while (hasNext()) {
-        PostOrder postOrder = deque.peekLast();
+        PostOrder postOrder = stack.peek();
         BinaryNode<T> node = postOrder.node;
         if (postOrder.visited) {
           if (node.right != null)
-            deque.add(new PostOrder(node.right));
+            stack.push(new PostOrder(node.right));
           if (node.left != null)
-            deque.add(new PostOrder(node.left));
+            stack.push(new PostOrder(node.left));
           postOrder.visited = true;
         } else {
-          deque.pollLast();
+          stack.pop();
           return node.data;
         }
       }
