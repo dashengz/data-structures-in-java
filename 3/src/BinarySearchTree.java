@@ -20,10 +20,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
     if (n == null) {
       return true;
     }
-    if (n.data.compareTo(less) <= 0 || n.data.compareTo(more) >= 0) {
-      return false;
-    }
-    return isBst(n.left, less, n.data) && isBst(n.right, n.data, more);
+    return n.data.compareTo(less) > 0 && n.data.compareTo(more) < 0 && isBst(n.left, less, n.data) && isBst(n.right, n.data, more);
   }
 
   // problem 3b
@@ -35,6 +32,18 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
   @Override
   public Iterator<T> iterator() {
     return null;
+  }
+
+  private class BSTIterator implements Iterator<T> {
+    @Override
+    public boolean hasNext() {
+      return false;
+    }
+
+    @Override
+    public T next() {
+      return null;
+    }
   }
 
   public void insert(T x) {
