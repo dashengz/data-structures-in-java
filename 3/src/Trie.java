@@ -13,6 +13,18 @@ public class Trie {
   // feel free (and you probably should) add helper private methods
   // problem 4a
   public void addWord(String word) {
+    addWord(root, word);
+  }
+
+  private void addWord(TrieNode root, String word) {
+    char[] letters = word.toCharArray();
+    TrieNode node = root;
+    for (int i = 0; i < word.length(); i++) {
+      if (node.children[letters[i] - 'a'] == null)
+        node.children[letters[i] - 'a'] = new TrieNode(letters[i], false);
+      node = node.children[letters[i] - 'a'];
+    }
+    node.endOfWord = true;
   }
 
   // problem 4b
@@ -67,9 +79,12 @@ public class Trie {
 
   public static void main(String[] args) {
     Trie trie = new Trie();
-    trie.addWord("hello");
-    trie.addWord("help");
+    trie.addWord("do");
+    trie.addWord("dog");
+    trie.addWord("doll");
+    trie.addWord("dock");
+    trie.addWord("doctor");
     System.out.println(trie);
-    System.out.println(trie.getStartsWith("hell"));
+//    System.out.println(trie.getStartsWith("hell"));
   }
 }
