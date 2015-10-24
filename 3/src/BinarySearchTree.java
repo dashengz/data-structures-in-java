@@ -1,6 +1,4 @@
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Iterator;
+import java.util.*;
 
 public class BinarySearchTree<T extends Comparable<? super T>> implements Iterable<T> {
 
@@ -58,18 +56,51 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Iterab
   // problem 3c
   @Override
   public Iterator<T> iterator() {
-    return null;
+
+    return new PostOrderIterator();
   }
 
-  private class BSTIterator implements Iterator<T> {
+  private class PostOrder {
+    BinaryNode<T> node;
+    boolean visited = false;
+    PostOrder(BinaryNode<T> n) {
+      node = n;
+    }
+  }
+
+  private class PostOrderIterator implements Iterator<T> {
+    Deque<PostOrder> deque;
+
+    PostOrderIterator() {
+      deque = new ArrayDeque<>();
+      deque.add(new PostOrder(root));
+    }
+
     @Override
     public boolean hasNext() {
-      return false;
+      return !deque.isEmpty();
     }
 
     @Override
     public T next() {
-      return null;
+      if (!hasNext())
+        throw new NoSuchElementException();
+
+      while (hasNext()) {
+        PostOrder postOrder = deque.peekLast();
+        BinaryNode<T> node = postOrder.node;
+        if (postOrder.visited) {
+          if (node.right != null)
+            deque.add(new PostOrder(node.right));
+          if (node.left != null)
+            deque.add(new PostOrder(node.left));
+          postOrder.visited = true;
+        } else {
+          deque.pollLast();
+          return node.data;
+        }
+      }
+      throw new AssertionError();
     }
   }
 
