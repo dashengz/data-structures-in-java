@@ -1,0 +1,46 @@
+Uni: dz2276
+Name: Dasheng Zhang
+
+Homework 4
+
+-------------------------------------
+
+Problem 1:
+
+Consider the following array of integers: a = [3, 9, 7, 8, 2, 5, 1]
+
+a) Show the result of inserting the integers in a one by one into an initially empty min-heap.
+Then show the result of calling deleteMin on the heap 3 times. After each insertion and
+deleteMin step, show the array and the tree structure it represents.
+
+A:
+
+b) Sort the array using in-place using Heap Sort. First show the result of turning a into a
+max heap using the linear time algorithm to build a heap (submit only the final array). Then
+show the array after each deleteMax step. The last step should be an array sorted in
+increasing order.
+
+A:
+
+-------------------------------------
+
+Problem 2:
+
+Give a big-O bound for the space required to store each of the following trees:
+
+a) A complete binary tree with N nodes that, in addition, has two extra levels (that is, it is
+very slightly unbalanced).
+
+A:
+
+b) a binary tree that has a deepest node at depth 2 log N.
+
+A:
+
+c) a binary tree that has a deepest node at depth 4.1 log N.
+
+A:
+
+d) the worst case binary tree.
+
+A:
