@@ -35,7 +35,7 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
 
   public void put(K key, V value) {
     Pair<K, V> pair = new Pair<>(key, value);
-    int hash = key.hashCode();
+    int hash = Math.abs(key.hashCode());
     int position = hash % tableSize;
     LinkedList<Pair<K, V>> linkedList = arrayList.get(position);
     boolean found = false;
@@ -58,7 +58,7 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
   public V get(K key) {
     V value = null;
     Pair<K, V> pair = new Pair<>(key, value);
-    int hash = key.hashCode();
+    int hash = Math.abs(key.hashCode());
     int position = hash % tableSize;
     LinkedList<Pair<K, V>> linkedList = arrayList.get(position);
     for (Pair<K, V> pair1 : linkedList) {
@@ -86,29 +86,32 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
 
   public static void main(String[] args) {
     SeparateChainingMap<String, Integer> map = new SeparateChainingMap<>();
-    map.put("A", 1);
-    map.put("B", 2);
-    map.put("C", 3);
-    map.put("D", 2);
-    map.put("E", 2);
-    map.put("F", 2);
-    map.put("G", 2);
-    map.put("H", 6);
-    map.put("I", 3);
-    map.put("I", 5);
-    map.put("J", 1);
-    map.put("K", 1);
-    map.put("L", 1);
-    map.put("M", 931);
-    map.put("N", 1);
-    map.put("O", 1);
-    map.put("P", 1);
-    map.put("Q", 1);
+//    for (int i = 0; i < 12; i++) {
+//      map.put(pokemons[i % 4], i);
+//    }
+
+//    map.put("B", 2);
+//    map.put("C", 3);
+//    map.put("D", 2);
+//    map.put("E", 2);
+//    map.put("F", 2);
+//    map.put("G", 2);
+//    map.put("H", 6);
+//    map.put("I", 3);
+//    map.put("I", 5);
+//    map.put("J", 1);
+//    map.put("K", 1);
+//    map.put("L", 1);
+//    map.put("M", 931);
+//    map.put("N", 1);
+//    map.put("O", 1);
+//    map.put("P", 1);
+//    map.put("Q", 1);
     System.out.println(map.arrayList);
-    System.out.println(map.get("A"));
-    System.out.println(map.get("G"));
-    System.out.println(map.get("M"));
-    System.out.println(map.getTableSize());
-    System.out.println(map.getSize());
+//    System.out.println(map.get("A"));
+//    System.out.println(map.get("G"));
+//    System.out.println(map.get("M"));
+//    System.out.println(map.getTableSize());
+//    System.out.println(map.getSize());
   }
 }
