@@ -25,7 +25,7 @@ public class BwogBot {
   }
 
   public int getCount(String word) {
-    return 0;
+    return map.get(word);
   }
 
   public List<String> getNMostPopularWords(int n) {
@@ -33,14 +33,14 @@ public class BwogBot {
   }
 
   public Map<String, Integer> getMap() {
-    return null;
+    return map;
   }
 
   public static void main(String[] args) throws IOException {
     BwogBot bot = new BwogBot();
-    bot.readFile("text.txt");
-//    System.out.println(bot.getCount("true")); // because linan's hungry now
+    bot.readFile("comments.txt");
+    System.out.println(bot.getCount("hamdel")); // because linan's hungry now
 //    System.out.println(bot.getNMostPopularWords(100));
-    System.out.println(bot.map.get("to"));
+    System.out.println(bot.getCount("to"));
   }
 }
