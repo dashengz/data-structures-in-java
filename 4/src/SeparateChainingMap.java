@@ -12,7 +12,11 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
   private ArrayList<LinkedList<Pair<K, V>>> arrayList;
 
   public SeparateChainingMap() {
-    tableSize = INITIAL_TABLE_SIZE;
+    this(INITIAL_TABLE_SIZE);
+  }
+
+  public SeparateChainingMap(int newTableSize) {
+    tableSize = newTableSize;
     size = 0;
     arrayList = new ArrayList<>();
     for (int i = 0; i < tableSize; i++)
@@ -42,8 +46,14 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
       }
     }
     if (!found) {
-      arrayList.get(position).add(pair);
       size++;
+      double factor = (double) size/tableSize;
+      if (factor > MAX_LOAD_FACTOR){
+        arrayList.get(position).add(pair);
+        upsize();
+      }
+      else
+        arrayList.get(position).add(pair);
     }
   }
 
@@ -63,35 +73,43 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
   }
 
   public void upsize() {
-//    tableSize += SCALE_FACTOR;
-//    ArrayList<LinkedList<Pair<K, V>>> newArrayList = new ArrayList<>();
-//    ArrayList<Pair<K, V>> pairs = new ArrayList<>();
-//    for (int i = 0; i < arrayList.size(); i++) {
-//      for (int j = 0; j < arrayList.get(i).size(); j++) {
-//        if (arrayList.get(i) != null)
-//          pairs.add(arrayList.get(i).get(j));
-//      }
-//    }
+    SeparateChainingMap<K, V> newMap = new SeparateChainingMap<>(tableSize * SCALE_FACTOR);
+
+    for (int i = 0; i < this.arrayList.size(); i++) {
+      for (int j = 0; j < this.arrayList.get(i).size(); j++) {
+        if (this.arrayList.get(i) != null)
+          newMap.put(this.arrayList.get(i).get(j).key, this.arrayList.get(i).get(j).value);
+      }
+    }
+
+    this.arrayList = newMap.arrayList;
+    this.tableSize = newMap.arrayList.size();
   }
 
   public static void main(String[] args) {
     SeparateChainingMap<String, Integer> map = new SeparateChainingMap<>();
     map.put("A", 1);
-    map.put("A", 2);
-//    map.put("C", 3);
-//    map.put("D", 2);
-//    map.put("E", 2);
-//    map.put("F", 2);
-//    map.put("G", 2);
-//    map.put("H", 6);
-//    map.put("I", 3);
-//    map.put("I", 5);
-    map.upsize();
-//    map.put("J", 1);
+    map.put("B", 2);
+    map.put("C", 3);
+    map.put("D", 2);
+    map.put("E", 2);
+    map.put("F", 2);
+    map.put("G", 2);
+    map.put("H", 6);
+    map.put("I", 3);
+    map.put("I", 5);
+    map.put("J", 1);
+    map.put("K", 1);
+    map.put("L", 1);
+    map.put("M", 931);
+    map.put("N", 1);
+    map.put("O", 1);
+    map.put("P", 1);
+    map.put("Q", 1);
     System.out.println(map.arrayList);
     System.out.println(map.get("A"));
-//    System.out.println(map.get("A"));
-//    System.out.println(map.get("I"));
+    System.out.println(map.get("G"));
+    System.out.println(map.get("M"));
     System.out.println(map.getTableSize());
     System.out.println(map.getSize());
   }
