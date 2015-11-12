@@ -46,14 +46,12 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
       }
     }
     if (!found) {
+      arrayList.get(position).add(pair);
       size++;
       double factor = (double) size/tableSize;
       if (factor > MAX_LOAD_FACTOR){
-        arrayList.get(position).add(pair);
         upsize();
       }
-      else
-        arrayList.get(position).add(pair);
     }
   }
 
