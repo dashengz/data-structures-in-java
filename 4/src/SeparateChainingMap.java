@@ -7,10 +7,13 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
   public static final int INITIAL_TABLE_SIZE = 8;
   public static final double MAX_LOAD_FACTOR = 1.0;
 
-  private int tableSize = INITIAL_TABLE_SIZE;
+  private int tableSize;
+  private int size;
   private ArrayList<LinkedList<Pair<K, V>>> arrayList;
 
   public SeparateChainingMap() {
+    tableSize = INITIAL_TABLE_SIZE;
+    size = 0;
     arrayList = new ArrayList<>();
     for (int i = 0; i < tableSize; i++)
       arrayList.add(new LinkedList<>());
@@ -18,12 +21,12 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
 
   public int getSize() {
     // returns number of pairs in map
-    return 0;
+    return size;
   }
 
   public int getTableSize() {
     // returns size of table
-    return 0;
+    return tableSize;
   }
 
   public void put(K key, V value) {
@@ -38,8 +41,10 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
         found = true;
       }
     }
-    if (!found)
+    if (!found) {
       arrayList.get(position).add(pair);
+      size++;
+    }
   }
 
   public V get(K key) {
@@ -74,6 +79,7 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
     System.out.println(map.get("E"));
     System.out.println(map.get("A"));
     System.out.println(map.get("F"));
-
+    System.out.println(map.getTableSize());
+    System.out.println(map.getSize());
   }
 }
