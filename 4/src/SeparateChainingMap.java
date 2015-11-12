@@ -63,22 +63,35 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
   }
 
   public void upsize() {
-
+//    tableSize += SCALE_FACTOR;
+//    ArrayList<LinkedList<Pair<K, V>>> newArrayList = new ArrayList<>();
+//    ArrayList<Pair<K, V>> pairs = new ArrayList<>();
+//    for (int i = 0; i < arrayList.size(); i++) {
+//      for (int j = 0; j < arrayList.get(i).size(); j++) {
+//        if (arrayList.get(i) != null)
+//          pairs.add(arrayList.get(i).get(j));
+//      }
+//    }
   }
 
   public static void main(String[] args) {
     SeparateChainingMap<String, Integer> map = new SeparateChainingMap<>();
     map.put("A", 1);
-    map.put("B", 2);
-    map.put("C", 3);
     map.put("A", 2);
-    map.put("E", 6);
-    map.put("B", 3);
-    map.put("D", 1);
+//    map.put("C", 3);
+//    map.put("D", 2);
+//    map.put("E", 2);
+//    map.put("F", 2);
+//    map.put("G", 2);
+//    map.put("H", 6);
+//    map.put("I", 3);
+//    map.put("I", 5);
+    map.upsize();
+//    map.put("J", 1);
     System.out.println(map.arrayList);
-    System.out.println(map.get("E"));
     System.out.println(map.get("A"));
-    System.out.println(map.get("F"));
+//    System.out.println(map.get("A"));
+//    System.out.println(map.get("I"));
     System.out.println(map.getTableSize());
     System.out.println(map.getSize());
   }
