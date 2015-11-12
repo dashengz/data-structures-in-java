@@ -130,21 +130,38 @@ deleteMax...
 
 Problem 2:
 
+We discsused that a complete binary tree of N elements uses array positions 1 to N.
+Suppose we try to use an array representation of a binary tree that is not
+complete. We use the same layout for the array as for a complete tree, but only
+store entries for nodes that are actually in the binary tree, leaving the other
+entries set to null.
+
 Give a big-O bound for the space required to store each of the following trees:
 
-a) A complete binary tree with N nodes that, in addition, has two extra levels (that is, it is
-very slightly unbalanced).
+a) A complete binary tree with N nodes that, in addition, has two extra levels (
+that is, it is very slightly unbalanced).
 
-A:
+A: 	Example scenario:
+			o
+		  /	  \
+		 o     o
+	    / \   / \
+	   o   o o   o
+	  /
+	 o
+	/
+   o
+
+Taking up 2^(⌈logN⌉ + 1) = O(2^logN) of space.
 
 b) a binary tree that has a deepest node at depth 2 log N.
 
-A:
+A: Taking up 2^(2logN + 1) = 2^(log(N^2) + 1) = 2N^2 = O(N^2) of space.
 
 c) a binary tree that has a deepest node at depth 4.1 log N.
 
-A:
+A: Taking up 2^(4.1logN + 1) = 2^(log(N^4.1) + 1) = 2N^4.1 = O(N^4.1) of space.
 
 d) the worst case binary tree.
 
-A:
+A: N elements in a worst binary tree means that it has N levels, which are 2^N - 1 Nodes. So the array takes up 2^N = O(2^N) of space.
