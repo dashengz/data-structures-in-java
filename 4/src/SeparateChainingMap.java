@@ -23,6 +23,10 @@ public class SeparateChainingMap<K extends Comparable<? super K>, V> implements 
       arrayList.add(new LinkedList<>());
   }
 
+  public ArrayList<LinkedList<Pair<K, V>>> getTable() {
+    return arrayList;
+  }
+
   public int getSize() {
     // returns number of pairs in map
     return size;
