@@ -1,0 +1,46 @@
+Uni: dz2276
+Name: Dasheng Zhang
+
+Homework 5
+
+-------------------------------------
+
+Problem 1: Sorting (15 pts)
+
+[314, 512, 004, 999, 023, 042, 613, 109, 001, 123, 666]
+
+Sort the following array of (base-10) integers using:
+
+* (a) Insertion Sort (for each entry that needs to be moved, show the array after it has been moved to its final position). 
+
+A: 
+
+* (b) Quick Sort with median of three pivot (show the pivot in each step and the subarray after partitioning according to the pivot). You do not have to do an in-place sort, i.e. you don't have to use swaps to partition the array. 
+
+A: 
+
+* (c) Radix Sort.
+
+A: 
+
+Problem 2: Sorting Stability (10 pts)
+
+(a) Some sorting algorithms are not stable. Suggest a way to make any sorting algorithm stable by adding extra information to the keys.
+
+A: 
+
+(b) Demonstrate, by providing a small example, that Quick Sort is not stable.
+
+A: 
+
+Problem 3: Parallel MergeSort (15 pts)
+
+In Merge Sort and Quick Sort, the individual recursive calls for each of the two partitions left and right of a subarray are independent of each other. You could therefore, in theory, run both recursive calls in parallel, for instance on a multicore CPU.
+
+Assuming left has N₁ elements and right has N₂ elements, the time needed to recursively sort both partitions is only max(T(N₁),T(N₂)).
+
+Now, assume you have a machine with an infinite number of cores, so you can run as many method calls in parallel as you want.
+
+What is the total running time to sort an array of length N using Merge Sort in this scenario? Provide a tight big-O bound and justify your answer.
+
+A: 
