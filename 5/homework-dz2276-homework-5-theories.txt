@@ -11,11 +11,14 @@ Problem 1: Sorting (15 pts)
 
 Sort the following array of (base-10) integers using:
 
-* (a) Insertion Sort (for each entry that needs to be moved, show the array after it has been moved to its final position). 
+* (a) Insertion Sort (for each entry that needs to be moved, show the array after it
+has been moved to its final position). 
 
 A: 
 
-* (b) Quick Sort with median of three pivot (show the pivot in each step and the subarray after partitioning according to the pivot). You do not have to do an in-place sort, i.e. you don't have to use swaps to partition the array. 
+* (b) Quick Sort with median of three pivot (show the pivot in each step and the
+subarray after partitioning according to the pivot). You do not have to do an in-place
+sort, i.e. you don't have to use swaps to partition the array. 
 
 A: 
 
@@ -23,9 +26,12 @@ A:
 
 A: 
 
+-------------------------------------
+
 Problem 2: Sorting Stability (10 pts)
 
-(a) Some sorting algorithms are not stable. Suggest a way to make any sorting algorithm stable by adding extra information to the keys.
+(a) Some sorting algorithms are not stable. Suggest a way to make any sorting algorithm
+stable by adding extra information to the keys.
 
 A: 
 
@@ -33,14 +39,44 @@ A:
 
 A: 
 
+-------------------------------------
+
 Problem 3: Parallel MergeSort (15 pts)
 
-In Merge Sort and Quick Sort, the individual recursive calls for each of the two partitions left and right of a subarray are independent of each other. You could therefore, in theory, run both recursive calls in parallel, for instance on a multicore CPU.
+In Merge Sort and Quick Sort, the individual recursive calls for each of the two
+partitions left and right of a subarray are independent of each other. You could
+therefore, in theory, run both recursive calls in parallel, for instance on a multicore
+CPU.
 
-Assuming left has N₁ elements and right has N₂ elements, the time needed to recursively sort both partitions is only max(T(N₁),T(N₂)).
+Assuming left has N₁ elements and right has N₂ elements, the time needed to recursively
+sort both partitions is only max(T(N₁),T(N₂)).
 
-Now, assume you have a machine with an infinite number of cores, so you can run as many method calls in parallel as you want.
+Now, assume you have a machine with an infinite number of cores, so you can run as many
+method calls in parallel as you want.
 
-What is the total running time to sort an array of length N using Merge Sort in this scenario? Provide a tight big-O bound and justify your answer.
+What is the total running time to sort an array of length N using Merge Sort in this
+scenario? Provide a tight big-O bound and justify your answer.
 
 A: 
+
+-------------------------------------
+
+Problem 6: Extra Credit (Theory, 10pts)
+
+For a fixed sequence of N integers, you can use a heap to find the median in O(N log N)
+time.
+
+Assume that, instead of a fixed sequence of integers, you have a stream (implemented as
+an iterator, as described in in problem 4). Instead of the k-largest integers, you want
+to to keep track of the median of the integers in the stream seen so far (not the
+mean!).
+
+Describe a way to keep track of the median in the stream, so that you can return the
+current median at any time in O(1). When we encounter a new number in the stream,
+updating the median should only take O(log N) time, where N is the number of integers
+seen in the stream so far, including the latest one.
+
+Hint: Use more than one heap.
+
+A: 
+
