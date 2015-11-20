@@ -90,14 +90,38 @@ A:
 
 Problem 2: Sorting Stability (10 pts)
 
-(a) Some sorting algorithms are not stable. Suggest a way to make any sorting algorithm
+* (a) Some sorting algorithms are not stable. Suggest a way to make any sorting algorithm
 stable by adding extra information to the keys.
 
-A: 
+A:
 
-(b) Demonstrate, by providing a small example, that Quick Sort is not stable.
+Quick Sort is not stable.
 
-A: 
+We can add an additional key to each element, storing their initial position in the array, when iterating through the array the first time.
+And when comparing each element with the pivot, we first compare if the element is equal to the pivot,
+if it is, then compare the additional keys, see if the key is less than the pivot's key.
+
+This way, elements with equal value will not fail the 'less than' check.
+The element that's input earlier will remain in the lower-value partition.
+
+Thus the sorting would no longer mess up the order, and become stable.
+
+* (b) Demonstrate, by providing a small example, that Quick Sort is not stable.
+
+A: Example: [2, 30, 4a, 5, 27, 3, 4b]
+(4a = 4b, the 'a' and 'b' are here to distinguish the two 4s)
+
+- 2 as Pivot:
+[2][30, 4a, 5, 27, 3, 4b]
+- 30 as Pivot:
+(4a, 5, 27, 3, 4b are all less than 30, so swap 4b with 30)
+[2][4b, 4a, 5, 27, 3][30]
+- 4b as Pivot:
+(4a is not less than 4b so quicksort thinks that 4a should be in the higher-value partition)
+[2][3][4b][5, 27, 4a][30]
+...
+We can see that 4b is now ahead of 4a, which is not the original input order.
+Thus, Quick Sort is not stable.
 
 -------------------------------------
 
