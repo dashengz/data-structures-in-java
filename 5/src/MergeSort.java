@@ -95,6 +95,9 @@ public class MergeSort {
 
         /** 
          * Problem 6: Merge Sort for Lists, Without Side Effects
+         *
+         * The Space Requirement is O(NlogN), in addition to the input array size N.
+         *
          */
         public static List<Integer> sortList(List<Integer> inputList) {
             List<Integer> left = new LinkedList<>();

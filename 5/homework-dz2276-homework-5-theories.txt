@@ -181,3 +181,16 @@ Hint: Use more than one heap.
 
 A: 
 
+* Here I decide that the median of an even-element integer array
+  to be the greater of the middle two integers.
+
+Create two priority queues, one in regular order, one in reverse order.
+
+Add the stream elements one by one into the heaps:
+    if the element is less than the median, add to the max heap / else add to min heap;
+    if the sizes of the two heaps differ more than one,
+        fetch the min (or max, if the max heap is the larger one among the two) in the min (max) heap and put it in the max (min) heap;
+The median of the stream would thus be:
+    the max of the max heap when the max heap has one more element than the min heap;
+    the min of the min heap when the min heap has equal or one more element than the max heap.
+
