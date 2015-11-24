@@ -72,7 +72,23 @@ public class MergeSort {
          * Problem 5: Iterative Bottom-up Merge Sort
          */
         public static void mergeSortB(Integer[] inputArray) {
-            return;
+            //temporary array that takes up O(N) space
+            Integer[] tempArray = new Integer[inputArray.length];
+            //first for loop with counter i to split array into subarrays
+            //multiply counter i by 2 each time the loop runs once to increase the size of the subarrays
+            for (int i = 1; i < inputArray.length; i = i * 2) {
+                //merge subarray pairs one by one
+                //using counter j to move on to the next pair
+                for ( int j = i; j < inputArray.length; j = j + i * 2) {
+                    //in case the second half is not full
+                    int end = j + i - 1;
+                    if (j + i > inputArray.length) {
+                        end = inputArray.length - 1;
+                    }
+                    //make use of the internal merge function to merge subarray pairs
+                    merge(inputArray, tempArray, j - i, j , end);
+                }
+            }
         }
 
 
@@ -95,9 +111,21 @@ public class MergeSort {
  
         public static void main(String[] args) {
             // Weiss sort
-            Integer[] a = {1,4,9,131,0,2,7,19,245,18};
-            MergeSort.mergeSort(a);
-            System.out.println(Arrays.toString(a)); // Should be [0, 1, 2, 4, 7, 9, 18, 19, 131, 245]
+            Integer[] a = {1};
+            Integer[] b = {1,4,9,131,0,2,7};
+            Integer[] c = {1,4,9,131,0,2,7,19};
+            Integer[] d = {1,4,9,131,0,2,7,19,245};
+            Integer[] e = {1,4,9,131,0,2,7,19,245,18,3,55,99,5,100,10,33};
+            MergeSort.mergeSortB(a);
+            MergeSort.mergeSortB(b);
+            MergeSort.mergeSortB(c);
+            MergeSort.mergeSortB(d);
+            MergeSort.mergeSortB(e);
+            System.out.println(Arrays.toString(a));
+            System.out.println(Arrays.toString(b));
+            System.out.println(Arrays.toString(c));
+            System.out.println(Arrays.toString(d));
+            System.out.println(Arrays.toString(e));
         }
 
 }
