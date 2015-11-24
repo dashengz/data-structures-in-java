@@ -1,5 +1,7 @@
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class MergeSort {
 
@@ -68,13 +70,13 @@ public class MergeSort {
         }
 
 
-       /** 
+        /**
          * Problem 5: Iterative Bottom-up Merge Sort
          */
         public static void mergeSortB(Integer[] inputArray) {
             //temporary array that takes up O(N) space
             Integer[] tempArray = new Integer[inputArray.length];
-            //first for loop with counter i to split array into subarrays
+            //first for loop with counter i to 'split' array into subarrays
             //multiply counter i by 2 each time the loop runs once to increase the size of the subarrays
             for (int i = 1; i < inputArray.length; i = i * 2) {
                 //merge subarray pairs one by one
@@ -96,7 +98,7 @@ public class MergeSort {
          * Problem 6: Merge Sort for Lists, Without Side Effects
          */
         public static List<Integer> sortList(List<Integer> inputList) {
-            return null; 
+            return null;
         }
         
 
@@ -104,28 +106,64 @@ public class MergeSort {
          * New merge method that merges two lists and returns a new list.
          * Use this method to implement sortList.
          */
-        public static List<Integer> mergeLists(List<Integer> left, List<Integer> right) { 
-            return null;
+        public static List<Integer> mergeLists(List<Integer> left, List<Integer> right) {
+            LinkedList<Integer> mergedList = new LinkedList<>();
+            ListIterator<Integer> iteratorLeft = left.listIterator();
+            ListIterator<Integer> iteratorRight = right.listIterator();
+            int leftTemp;
+            int rightTemp;
+
+            while (iteratorLeft.hasNext() && iteratorRight.hasNext()) {
+                leftTemp = iteratorLeft.next();
+                rightTemp = iteratorRight.next();
+                if (leftTemp <= rightTemp) {
+                    mergedList.add(leftTemp);
+                    iteratorRight.previous();
+                }
+                else {
+                    mergedList.add(rightTemp);
+                    iteratorLeft.previous();
+                }
+
+            }
+
+            while (iteratorLeft.hasNext()) {
+                leftTemp = iteratorLeft.next();
+                mergedList.add(leftTemp);
+            }
+
+            while (iteratorRight.hasNext()) {
+                rightTemp = iteratorRight.next();
+                mergedList.add(rightTemp);
+            }
+
+            return mergedList;
         }
         
  
         public static void main(String[] args) {
             // Weiss sort
-            Integer[] a = {1};
-            Integer[] b = {1,4,9,131,0,2,7};
-            Integer[] c = {1,4,9,131,0,2,7,19};
-            Integer[] d = {1,4,9,131,0,2,7,19,245};
-            Integer[] e = {1,4,9,131,0,2,7,19,245,18,3,55,99,5,100,10,33};
-            MergeSort.mergeSortB(a);
-            MergeSort.mergeSortB(b);
-            MergeSort.mergeSortB(c);
-            MergeSort.mergeSortB(d);
-            MergeSort.mergeSortB(e);
-            System.out.println(Arrays.toString(a));
-            System.out.println(Arrays.toString(b));
-            System.out.println(Arrays.toString(c));
-            System.out.println(Arrays.toString(d));
-            System.out.println(Arrays.toString(e));
+//            Integer[] a = {1};
+//            Integer[] b = {1,4,9,131,0,2,7};
+//            Integer[] c = {1,4,9,131,0,2,7,19};
+//            Integer[] d = {1,4,9,131,0,2,7,19,245};
+//            Integer[] e = {1,4,9,131,0,2,7,19,245,18,3,55,99,5,100,10,33};
+//            MergeSort.mergeSortB(a);
+//            MergeSort.mergeSortB(b);
+//            MergeSort.mergeSortB(c);
+//            MergeSort.mergeSortB(d);
+//            MergeSort.mergeSortB(e);
+//            System.out.println(Arrays.toString(a));
+//            System.out.println(Arrays.toString(b));
+//            System.out.println(Arrays.toString(c));
+//            System.out.println(Arrays.toString(d));
+//            System.out.println(Arrays.toString(e));
+
+            List<Integer> left = Arrays.asList(new Integer[] { 1,3,6,11 });
+            List<Integer> right = Arrays.asList(new Integer[] { 2,4,5,10 });
+            List<Integer> resultStudent = MergeSort.mergeLists(left, right);
+            System.out.println(Arrays.toString(resultStudent.toArray()));
+
         }
 
 }
