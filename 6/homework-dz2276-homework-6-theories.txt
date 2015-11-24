@@ -1,0 +1,45 @@
+Uni: dz2276
+Name: Dasheng Zhang
+
+Homework 6
+
+-------------------------------------
+
+Problem 1 (10 pts)
+
+Use  Kruskal's  algorithm  to  find  the  minimum  spanning  tree  on  the  following graph.
+Show  the forest maintained after each step.
+
+A:
+
+-------------------------------------
+
+Problem 2 (10 pts)
+
+Provide an example directed graph *G* in which Dijkstra's algorithm will produce the wrong result
+because *G* contains a negative weight edge (but no negative cost cycle).
+
+Show a run of Dijkstra's algorithm that provides the wrong result (i.e. doesn't find the correct shortest path cost for a
+node).
+
+A:
+
+-------------------------------------
+
+Problem 3 (10 pts)
+
+A bipartite graph *G= (V; E)* is a graph whose vertices *V* can be partitioned into two disjoint sets *V₁* and *V₂*,
+such that every edge connects a vertex in *V₁* to one in *V₂*.
+
+For every edge *(u,v)* either *u ∈ V₁* and *v ∈ V₂*, or *u ∈ V₂* and *v ∈ V₁*.
+
+For example, the following graph is bipartite with  *V₁={A,B,C,D}* and *V₂={E,F,G}*.
+
+Describe an algorithm (in pseudocode or in your own words) that detects if a graph is bipartite.
+
+Your algorithm should run in *O(|V|+|E|)*.
+
+Hint: Try to modify breadth first search.
+
+A:
+
