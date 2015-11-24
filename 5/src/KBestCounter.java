@@ -1,20 +1,26 @@
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.List;
 
 public class KBestCounter<T extends Comparable<T>> {
    
     PriorityQueue<T> heap;
+    private int kBest;
 
     public KBestCounter(int k) {
-        return;        
+        heap = new PriorityQueue<>();
+        kBest = k;
     }
 
     public void count(T x) {
-        return;
+        heap.add(x);
     }
 
     public List<T> kbest() {
-        return null; 
-    } 
-
+        LinkedList<T> kBestList = new LinkedList<>();
+        for (int i = 0; i < kBest; i++) {
+            kBestList.add(heap.poll());
+        }
+        return kBestList;
+    }
 }

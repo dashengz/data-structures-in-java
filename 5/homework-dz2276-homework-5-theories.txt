@@ -145,15 +145,15 @@ A:
 
 In the scenario described above, the merge sort will take 2logN steps, because merge sort splits the array into half
 everytime and then needs to merge them back together again. Example below:
-        o
+      oooo
       /   \
-     o     o
+     oo   oo
     / \   / \
    o   o o   o
     \ /   \ /
-     o     o
+     oo   oo
       \   /
-        o
+       oooo
  (2log4 = 4 steps)
 
 So the time T = 2 (N/2^0 + N/2^1 + N/2^2 + ... + N/2^k)
