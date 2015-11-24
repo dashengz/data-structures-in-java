@@ -1,7 +1,6 @@
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class MergeSort {
 
@@ -98,7 +97,26 @@ public class MergeSort {
          * Problem 6: Merge Sort for Lists, Without Side Effects
          */
         public static List<Integer> sortList(List<Integer> inputList) {
-            return null;
+            List<Integer> left = new LinkedList<>();
+            List<Integer> right = new LinkedList<>();
+
+            //base case
+            if (inputList.size() == 1) {
+                return inputList;
+            } else {
+                for (int l : inputList.subList(0, inputList.size() / 2)) {
+                    left.add(l);
+                }
+
+                for (int r : inputList.subList(inputList.size() / 2, inputList.size())) {
+                    right.add(r);
+                }
+                //recursively sort left and right halves
+                left = sortList(left);
+                right = sortList(right);
+            }
+            //merge and return the final results
+            return mergeLists(left,right);
         }
         
 
@@ -124,7 +142,6 @@ public class MergeSort {
                     mergedList.add(rightTemp);
                     iteratorLeft.previous();
                 }
-
             }
 
             while (iteratorLeft.hasNext()) {
@@ -160,10 +177,13 @@ public class MergeSort {
 //            System.out.println(Arrays.toString(e));
 
             List<Integer> left = Arrays.asList(new Integer[] { 1,3,6,11 });
-            List<Integer> right = Arrays.asList(new Integer[] { 2,4,5,10 });
+            List<Integer> right = Arrays.asList(new Integer[] { 2,4,5 });
             List<Integer> resultStudent = MergeSort.mergeLists(left, right);
             System.out.println(Arrays.toString(resultStudent.toArray()));
+            List<Integer> inputList = IntStream.range(1, 10).boxed().collect(Collectors.toList());
+            Collections.shuffle(inputList);
+            List<Integer> resultStudent2 = MergeSort.sortList(inputList);
+            System.out.println(Arrays.toString(resultStudent2.toArray()));
 
         }
-
 }
