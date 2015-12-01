@@ -1,6 +1,6 @@
 public class MapReader {
 
-  public Graph readGraph(String vertexfile, String edgefile) {
+  public static Graph readGraph(String vertexfile, String edgefile) {
     return null; // TODO 
   }
 

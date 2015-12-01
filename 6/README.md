@@ -68,7 +68,7 @@ Write the method `public double computeEuclideanCost(double ux, double uy, doubl
 The euclidean distance is defined as  ![d(u,v) = sqrt( (u_x - v_x)^2 + (u_y - v_y)^2 )](figures/euclidean.png)
 Take a look at [java.lang.Math](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html) to do the calculation.
 
-Then, write the  method `public void computeEuclideanCosts()` to *Graph* that  computes  and  sets the cost for **each edge** using the euclidean distance between the coordinates of the vertices.
+Then, write the  method `public void computeAllEuclideanCosts()` to *Graph* that  computes  and  sets the cost for **each edge** using the euclidean distance between the coordinates of the vertices.
 
 ### Problem 7 (13 pts)
 Add a method `public void doBfs(String s)` to
@@ -86,7 +86,9 @@ instance:
 Add a method public void `doDijkstra(String s)` to `Graph`, that uses Dijkstra's algorithm to  find  the  weighted  shortest  paths  from  the  start  vertex  with  the  name *s*.   As  before,  calling the method should just set the correct information for each vertex (using the same three fields as for BFS). 
 
 As for BFS, write a method `public Graph getWeightedShortestPath(String s, String t)`
-that returns a `Graph` with the  same  vertices  as  the  original  graph,  but  only  the  edges  on  the  shortest  cost  path  between *s* and *t*.  Hint:  You might want to implement the `compareTo` method in `Vertex`.
+that returns a `Graph` with the  same  vertices  as  the  original  graph,  but  only  the  edges  on  the  shortest  cost  path  between *s* and *t*.  
+
+When implementing Dijkstra's algorithm, be careful what kind of object you store in the PriorityQueue. If the algorithm updates the minimum path cost for a vertex the second time, you should NOT update the cost for the previous entry in the PriorityQueue. Since the PriorityQueue is implemented as a heap, this would cause the heap order property to be violated and would ultimately lead to wrong results. Instead, you might want to create a new class that stores a pair of the cost and a reference to the vertex object. You can then insert a new instance of this class into the PriorityQueue each time you update the cost for a vertex.
 
 Write a testing class `TestDijkstra` that reads in a map fle, runs `getWeightedShortestPath` on the graph, and then displays the resulting graph.  The program should accept the same command line arguments as `TestBfs`.
 
