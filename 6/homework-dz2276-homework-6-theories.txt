@@ -7,10 +7,38 @@ Homework 6
 
 Problem 1 (10 pts)
 
-Use  Kruskal's  algorithm  to  find  the  minimum  spanning  tree  on  the  following graph.
-Show  the forest maintained after each step.
+Use Kruskal's algorithm to find the minimum spanning tree on the following graph.
+Show the forest maintained after each step.
 
 A:
+
+Edges are sorted based on weight.
+
+(2,(A,C))
+(2,(D,G))
+(3,(D,E))
+(5,(F,H))
+(7,(C,F))
+(7,(C,D))
+(8,(F,G))
+(8,(B,E))
+(9,(C,G))
+(10,(B,D))
+
+T = {(2,(A,C))};
+T = {(2,(A,C)),(2,(D,G))};
+T = {(2,(A,C)),(2,(D,G)),(3,(D,E))};
+T = {(2,(A,C)),(2,(D,G)),(3,(D,E)),(5,(F,H))};
+T = {(2,(A,C)),(2,(D,G)),(3,(D,E)),(5,(F,H)),(7,(C,F))};
+T = {(2,(A,C)),(2,(D,G)),(3,(D,E)),(5,(F,H)),(7,(C,F)),(7,(C,D))};
+(8,(F,G)) forms a cycle
+(9,(C,G)) forms a cycle
+T = {(2,(A,C)),(2,(D,G)),(3,(D,E)),(5,(F,H)),(7,(C,F)),(7,(C,D)),(8,(B,E))};
+(10,(B,D)) forms a cycle
+
+The final forest (MST) is:
+
+T = {(2,(A,C)),(2,(D,G)),(3,(D,E)),(5,(F,H)),(7,(C,F)),(7,(C,D)),(8,(B,E))};
 
 -------------------------------------
 
