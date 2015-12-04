@@ -44,8 +44,8 @@ T = {(2,(A,C)),(2,(D,G)),(3,(D,E)),(5,(F,H)),(7,(C,F)),(7,(C,D)),(8,(B,E))};
 
 Problem 2 (10 pts)
 
-Provide an example directed graph *G* in which Dijkstra's algorithm will produce the wrong result
-because *G* contains a negative weight edge (but no negative cost cycle).
+Provide an example directed graph G in which Dijkstra's algorithm will produce the wrong result
+because G contains a negative weight edge (but no negative cost cycle).
 
 Show a run of Dijkstra's algorithm that provides the wrong result (i.e. doesn't find the correct shortest path cost for a
 node).
@@ -71,7 +71,7 @@ Explore C next:
     Nothing changes;
 Explore B next:
     C's cost is not updated, because 2+3=5>1,
-    so *Edge(B,C) is considered as processed;
+    so Edge(B,C) is considered as processed;
 Explore D next:
     B -> -20, and the algorithm finishes,
     since Edge(B,C) is already processed.
@@ -85,18 +85,33 @@ Therefore, if graph G contains a negative weight edge, Dijkstra's algorithm coul
 
 Problem 3 (10 pts)
 
-A bipartite graph *G= (V; E)* is a graph whose vertices *V* can be partitioned into two disjoint sets *V₁* and *V₂*,
-such that every edge connects a vertex in *V₁* to one in *V₂*.
+A bipartite graph G= (V; E) is a graph whose vertices V can be partitioned into two disjoint sets V₁ and V₂,
+such that every edge connects a vertex in V₁ to one in V₂.
 
-For every edge *(u,v)* either *u ∈ V₁* and *v ∈ V₂*, or *u ∈ V₂* and *v ∈ V₁*.
+For every edge (u,v) either u ∈ V₁ and v ∈ V₂, or u ∈ V₂ and v ∈ V₁.
 
-For example, the following graph is bipartite with  *V₁={A,B,C,D}* and *V₂={E,F,G}*.
+For example, the following graph is bipartite with  V₁={A,B,C,D} and V₂={E,F,G}.
 
 Describe an algorithm (in pseudocode or in your own words) that detects if a graph is bipartite.
 
-Your algorithm should run in *O(|V|+|E|)*.
+Your algorithm should run in O(|V|+|E|).
 
 Hint: Try to modify breadth first search.
 
 A:
 
+Like BFS, use queue to hold the vertices, but have two sets that stores each partitions.
+
+Pueudocode:
+
+enqueue s
+add s to group1 set
+while the queue is not empty:
+    u <- dequeue()
+        for each vertex v that is adjacent to u:
+            if v is in group1:
+                break (This graph is not a bipartite graph)
+            add v to group2 set
+            enqueue(v)
+
+It's basically the same as BFS, so it should run in O(|V|+|E|).
