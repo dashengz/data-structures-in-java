@@ -73,7 +73,16 @@ public class Graph {
    ****************************/ 
 
   public void addUndirectedEdge(String s, String t, double cost) {
-    return; // TODO
+    if (!vertices.containsKey(s))
+      addVertex(s);
+    if (!vertices.containsKey(t))
+      addVertex(t);
+    Vertex sourceVertex = vertices.get(s);
+    Vertex targetVertex = vertices.get(t);
+    Edge sToT = new Edge(sourceVertex, targetVertex, cost);
+    Edge tToS = new Edge(targetVertex, sourceVertex, cost);
+    sourceVertex.addEdge(sToT);
+    targetVertex.addEdge(tToS);
   }
 
   public double computeEuclideanCost(double ux, double uy, double vx, double vy) {
