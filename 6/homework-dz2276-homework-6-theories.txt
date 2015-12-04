@@ -52,6 +52,35 @@ node).
 
 A:
 
+Consider this graph:
+
+A: (D,10),(B,2),(C,1)
+B: (C,3)
+C:
+D: (B,-30)
+
+If we use Dijkstra's algorithm and start with vertex A:
+
+('->' annotates cost)
+
+Start with A:
+    A -> 0, B,C,D -> infinity;
+Explore A:
+    C -> 1, B -> 2, D -> 10;
+Explore C next:
+    Nothing changes;
+Explore B next:
+    C's cost is not updated, because 2+3=5>1,
+    so *Edge(B,C) is considered as processed;
+Explore D next:
+    B -> -20, and the algorithm finishes,
+    since Edge(B,C) is already processed.
+
+So using Dijkstra's algorithm, the shortest path cost from vertex A to C is 1.
+But actually if we go from A to D to B to C, the cost is only (10-30+3=) -17.
+
+Therefore, if graph G contains a negative weight edge, Dijkstra's algorithm could provide wrong results.
+
 -------------------------------------
 
 Problem 3 (10 pts)
