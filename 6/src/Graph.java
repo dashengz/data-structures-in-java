@@ -38,10 +38,12 @@ public class Graph {
    * Add a new edge from u to v. Create new nodes if these nodes don't exist
    * yet. This method permits adding multiple edges between the same nodes.
    * 
-   * @param u
+   * @param nameU
    *          the source vertex.
-   * @param w
+   * @param nameV
    *          the target vertex.
+   * @param cost
+   *          the cost of the edge.
    */
   public void addEdge(String nameU, String nameV, Double cost) {
     if (!vertices.containsKey(nameU))
@@ -58,9 +60,9 @@ public class Graph {
    * Add a new edge from u to v. Create new nodes if these nodes don't exist
    * yet. This method permits adding multiple edges between the same nodes.
    * 
-   * @param u
+   * @param nameU
    *          unique name of the first vertex.
-   * @param w
+   * @param nameV
    *          unique name of the second vertex.
    */
   public void addEdge(String nameU, String nameV) {
@@ -86,11 +88,15 @@ public class Graph {
   }
 
   public double computeEuclideanCost(double ux, double uy, double vx, double vy) {
-    return 0.0; // TODO
+    return Math.sqrt((ux - vx) * (ux - vx) + (uy - vy) * (uy - vy));
   }
 
   public void computeAllEuclideanCosts() {
-    return; // TODO
+    for (Vertex v : vertices.values()) {
+      for (Edge e : v.getEdges()) {
+        e.cost = computeEuclideanCost(e.sourceVertex.posX,e.sourceVertex.posY,e.targetVertex.posX,e.targetVertex.posY);
+      }
+    }
   }
 
   /** BFS */
@@ -151,11 +157,11 @@ public class Graph {
     g.addEdge("v3", "v0");
     g.addEdge("v0", "v2");
     g.addEdge("v1", "v3");
-
     g.printAdjacencyList();
 
     DisplayGraph display = new DisplayGraph(g);
     display.setVisible(true);
+
   }
 
 }
