@@ -94,14 +94,17 @@ public class Graph {
   public void computeAllEuclideanCosts() {
     for (Vertex v : vertices.values()) {
       for (Edge e : v.getEdges()) {
-        e.cost = computeEuclideanCost(e.sourceVertex.posX,e.sourceVertex.posY,e.targetVertex.posX,e.targetVertex.posY);
+        // assumes that no actual euclidean cost in the map is the default value 1.0
+        // since this is an undirected graph, without the if statement, the edge would all be calculated twice.
+        if (e.cost == 1.0)
+          e.cost = computeEuclideanCost(e.sourceVertex.posX,e.sourceVertex.posY,e.targetVertex.posX,e.targetVertex.posY);
       }
     }
   }
 
   /** BFS */
   public void doBfs(String s) {
-    return; // TODO
+
   }
   
   public Graph getUnweightedShortestPath(String s, String t) {

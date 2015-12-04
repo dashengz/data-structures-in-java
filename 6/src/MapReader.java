@@ -41,6 +41,10 @@ public class MapReader {
     // based on the file names input, create a map graph
     Graph mapGraph = readGraph(vertexfile, edgefile);
 
+    // test computeAllEuclideanCosts()
+    mapGraph.computeAllEuclideanCosts();
+    mapGraph.printAdjacencyList();
+
     // display the map graph
     DisplayGraph display = new DisplayGraph(mapGraph);
     display.setVisible(true);
