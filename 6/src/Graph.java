@@ -151,7 +151,12 @@ public class Graph {
     return spStoT;
   }
 
-  /** Dijkstra's */
+  /** Dijkstra's
+   * An example city pair that has different unweighted shortest path and weighted shortest path:
+   * SaintLouis and Charleston:
+   * BFS's result: SaintLouis -> Nashville -> Raleigh -> Charleston
+   * Dijkstra's result: SaintLouis -> Nashville -> Atlanta -> Charleston
+   */
   public void doDijkstra(String s) {
     PriorityQueue<Pair> dijkstraPQ = new PriorityQueue<>();
     Vertex vertexS = getVertex(s);
@@ -236,7 +241,7 @@ public class Graph {
   }
 
   public Graph getMinimumSpanningTree(String s) {
-  // call doPrim() and start with s
+    // call doPrim() and start with s
     doPrim(s);
 
     Graph mst = new Graph();
@@ -247,7 +252,6 @@ public class Graph {
     }
 
     for (Vertex v : vertices.values()) {
-
       while (v.backpointer != null && !v.visited) {
         Vertex u = v.backpointer;
         v.visited = true;
