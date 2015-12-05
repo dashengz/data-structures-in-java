@@ -153,20 +153,66 @@ public class Graph {
 
   /** Dijkstra's */
   public void doDijkstra(String s) {
-    return; // TODO
+    PriorityQueue<Pair> dijkstraPQ = new PriorityQueue<>();
+    Vertex vertexS = getVertex(s);
+    vertexS.cost = 0;
+    vertexS.visited = true;
+    for (Vertex v : vertices.values()) {
+      if (!v.name.equalsIgnoreCase(vertexS.name))
+        v.cost = Double.MAX_VALUE;
+    }
+    dijkstraPQ.add(new Pair(vertexS.cost, vertexS));
+
+    while (dijkstraPQ.size() > 0) {
+      Pair u = dijkstraPQ.poll();
+      if (!u.vertex.visited) {
+        u.vertex.visited = true;
+        for (Edge e : u.vertex.getEdges()) {
+          Vertex v = e.targetVertex;
+          if (!v.visited) {
+            if (u.cost + e.cost < v.cost) {
+              v.backpointer = u.vertex;
+              v.cost = u.cost + e.cost;
+              v.visited = true;
+              dijkstraPQ.add(new Pair(v.cost, v));
+            }
+          }
+        }
+      }
+    }
   }
 
   public Graph getWeightedShortestPath(String s, String t) {
-    return null; // TODO
+    // call doDijkstra() and start with s
+    doDijkstra(s);
+
+    Graph spStoT = new Graph();
+    for (Vertex v : vertices.values()) {
+      spStoT.addVertex(v);
+      spStoT.getVertex(v.name).getEdges().clear();
+    }
+
+    Vertex vertexS = getVertex(s);
+    Vertex vertexT = getVertex(t);
+
+    Vertex u = vertexT.backpointer;
+    spStoT.addUndirectedEdge(t, u.name, 1.0);
+    while (!u.name.equalsIgnoreCase(vertexS.name)) {
+      spStoT.addUndirectedEdge(u.name, u.backpointer.name, 1.0);
+      u = u.backpointer;
+    }
+
+    return spStoT;
   }
 
   /** Prim's */
   public void doPrim(String s) {
-    return; // TODO
+
   }
 
   public Graph getMinimumSpanningTree(String s) {
-    return null; // TODO
+
+    return null;
   }
 
   /*************************/
