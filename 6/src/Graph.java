@@ -110,15 +110,18 @@ public class Graph {
         v.cost = Double.MAX_VALUE;
     }
     bfsQ.add(vertexS);
-    while (bfsQ.size()> 0) {
+
+    while (bfsQ.size() > 0) {
       Vertex u = bfsQ.pollFirst();
       for (Edge e : u.getEdges()) {
         Vertex v = e.targetVertex;
-        if (v.cost == Double.MAX_VALUE) {
-          v.backpointer = u;
-          v.cost = u.cost + 1;
-          v.visited = true;
-          bfsQ.add(v);
+        if (!v.visited) {
+          if (v.cost == Double.MAX_VALUE) {
+            v.backpointer = u;
+            v.cost = u.cost + 1;
+            v.visited = true;
+            bfsQ.add(v);
+          }
         }
       }
     }
