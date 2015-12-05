@@ -156,7 +156,6 @@ public class Graph {
     PriorityQueue<Pair> dijkstraPQ = new PriorityQueue<>();
     Vertex vertexS = getVertex(s);
     vertexS.cost = 0;
-    vertexS.visited = true;
     for (Vertex v : vertices.values()) {
       if (!v.name.equalsIgnoreCase(vertexS.name))
         v.cost = Double.MAX_VALUE;
@@ -173,7 +172,6 @@ public class Graph {
             if (u.cost + e.cost < v.cost) {
               v.backpointer = u.vertex;
               v.cost = u.cost + e.cost;
-              v.visited = true;
               dijkstraPQ.add(new Pair(v.cost, v));
             }
           }
