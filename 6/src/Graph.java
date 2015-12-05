@@ -1,6 +1,4 @@
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Graph {
 
@@ -104,11 +102,49 @@ public class Graph {
 
   /** BFS */
   public void doBfs(String s) {
-
+    LinkedList<Vertex> bfsQ = new LinkedList<>();
+    Vertex vertexS = getVertex(s);
+    vertexS.cost = 0;
+    for (Vertex v : vertices.values()) {
+      if (!v.name.equalsIgnoreCase(vertexS.name))
+        v.cost = Double.MAX_VALUE;
+    }
+    bfsQ.add(vertexS);
+    while (bfsQ.size()> 0) {
+      Vertex u = bfsQ.pollFirst();
+      for (Edge e : u.getEdges()) {
+        Vertex v = e.targetVertex;
+        if (v.cost == Double.MAX_VALUE) {
+          v.backpointer = u;
+          v.cost = u.cost + 1;
+          v.visited = true;
+          bfsQ.add(v);
+        }
+      }
+    }
   }
   
   public Graph getUnweightedShortestPath(String s, String t) {
-    return null; // TODO
+    // call doBfs() and start with s
+    doBfs(s);
+
+    Graph spStoT = new Graph();
+    for (Vertex v : vertices.values()) {
+      spStoT.addVertex(v);
+      spStoT.getVertex(v.name).getEdges().clear();
+    }
+
+    Vertex vertexS = getVertex(s);
+    Vertex vertexT = getVertex(t);
+
+    Vertex u = vertexT.backpointer;
+    spStoT.addUndirectedEdge(t, u.name, 1.0);
+    while (!u.name.equalsIgnoreCase(vertexS.name)) {
+      spStoT.addUndirectedEdge(u.name, u.backpointer.name, 1.0);
+      u = u.backpointer;
+    }
+
+    return spStoT;
   }
 
   /** Dijkstra's */
