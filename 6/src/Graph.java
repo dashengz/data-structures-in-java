@@ -159,6 +159,7 @@ public class Graph {
     for (Vertex v : vertices.values()) {
       if (!v.name.equalsIgnoreCase(vertexS.name))
         v.cost = Double.MAX_VALUE;
+        v.visited = false;
     }
     dijkstraPQ.add(new Pair(vertexS.cost, vertexS));
 
@@ -205,12 +206,56 @@ public class Graph {
 
   /** Prim's */
   public void doPrim(String s) {
+    PriorityQueue<Pair> primPQ = new PriorityQueue<>();
+    Vertex vertexS = getVertex(s);
+    vertexS.cost = 0;
+    vertexS.visited = true;
+    for (Vertex v : vertices.values()) {
+      if (!v.name.equalsIgnoreCase(vertexS.name))
+        v.cost = Double.MAX_VALUE;
+        v.visited = false;
+    }
+    primPQ.add(new Pair(vertexS.cost, vertexS));
 
+    while (primPQ.size() > 0) {
+      Pair u = primPQ.poll();
+      if (!u.vertex.visited) {
+        u.vertex.visited = true;
+        for (Edge e : u.vertex.getEdges()) {
+          Vertex v = e.targetVertex;
+          if (!v.visited) {
+            if (e.cost < v.cost) {
+              v.backpointer = u.vertex;
+              v.cost = e.cost;
+              primPQ.add(new Pair(v.cost, v));
+            }
+          }
+        }
+      }
+    }
   }
 
   public Graph getMinimumSpanningTree(String s) {
+  // call doPrim() and start with s
+    doPrim(s);
 
-    return null;
+    Graph mst = new Graph();
+    for (Vertex v : vertices.values()) {
+      mst.addVertex(v);
+      v.visited = false;
+      mst.getVertex(v.name).getEdges().clear();
+    }
+
+    for (Vertex v : vertices.values()) {
+
+      while (v.backpointer != null && !v.visited) {
+        Vertex u = v.backpointer;
+        v.visited = true;
+        mst.addUndirectedEdge(v.name, u.name, 1.0);
+      }
+    }
+
+    return mst;
   }
 
   /*************************/
