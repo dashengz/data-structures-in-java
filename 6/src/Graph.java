@@ -105,6 +105,7 @@ public class Graph {
     LinkedList<Vertex> bfsQ = new LinkedList<>();
     Vertex vertexS = getVertex(s);
     vertexS.cost = 0;
+    vertexS.visited = true;
     for (Vertex v : vertices.values()) {
       if (!v.name.equalsIgnoreCase(vertexS.name))
         v.cost = Double.MAX_VALUE;
