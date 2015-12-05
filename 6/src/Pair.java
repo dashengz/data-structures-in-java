@@ -1,5 +1,7 @@
 /**
  * Created by Jonathan on 12/4/15.
+ * Pair class that hold cost and vertex
+ * Implements Comparable<Pair>
  */
 public class Pair implements Comparable<Pair>{
     public Double cost;

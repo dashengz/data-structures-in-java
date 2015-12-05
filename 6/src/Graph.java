@@ -196,8 +196,8 @@ public class Graph {
       spStoT.getVertex(v.name).getEdges().clear();
     }
 
-    Vertex vertexS = getVertex(s);
-    Vertex vertexT = getVertex(t);
+    Vertex vertexS = spStoT.getVertex(s);
+    Vertex vertexT = spStoT.getVertex(t);
 
     Vertex u = vertexT.backpointer;
     spStoT.addUndirectedEdge(t, u.name, 1.0);
