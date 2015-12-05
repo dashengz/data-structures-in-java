@@ -177,7 +177,7 @@ public class Graph {
           if (!v.visited) {
             if (u.cost + e.cost < v.cost) {
               v.backpointer = u.vertex;
-              v.cost = u.cost + e.cost;
+              v.cost = u.vertex.cost + e.cost;
               dijkstraPQ.add(new Pair(v.cost, v));
             }
           }

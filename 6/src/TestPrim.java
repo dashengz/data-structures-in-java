@@ -7,5 +7,4 @@ public class TestPrim {
     DisplayGraph display = new DisplayGraph(map.getMinimumSpanningTree(args[2]));
     display.setVisible(true);
   }
-
 }
