@@ -1,3 +1,5 @@
 /bin/
 *.class
 .DS_Store
+.idea
+*.iml
