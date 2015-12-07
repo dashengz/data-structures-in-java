@@ -61,7 +61,7 @@ Write a main method for `MapReader`. When the program is called using
 
 `$ java  MapReader  ttrvertices.txt  ttredges.txt`
 
-it should read in a map and store it as a Graph.  It should then display the map, using the same mechanism as in the main method for the `Graph` class.
+it should read in a map and store it as a Graph.  It should then display the map, using the same mechanism as in the main method for the `Graph` class. Make sure to only display the map in the main method, not in the `readGraph` method.
 
 ### Problem 6 (10 pts)
 Write the method `public double computeEuclideanCost(double ux, double uy, double vx, double vy)` that computes the euclidean  (i.e.  straight line) distance between two coordinates (specified by (ux, uy) and (vx, vy) respectively, where the parameter ending in x is the horizontal coordinate, and the parameter ending in y is the vertical coordinate).
