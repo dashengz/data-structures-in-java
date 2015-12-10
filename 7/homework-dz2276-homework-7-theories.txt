@@ -68,26 +68,36 @@ can't link together without going through vertex "Kevin Bacon" first): Do the br
 distance markers should be the minimum number of links between the two actors.
 
 2) If "the minimum number of links between two arbitrary actors" means the direct shortest path from the two (they don't
-have to go through vertex "Kevin Bacon" first): Do the breadth-first search starting from vertex "A", and after the markers
-of the vertices are updated, get vertex "B" from the graph, the distance marker of vertex "B" should be the minimum number
-of links between the two actors.
+have to go through vertex "Kevin Bacon" first / "Kevin Bacon" might not even be connected to the two but the two could be
+connected): Do the breadth-first search starting from vertex "A", and after the markers of the vertices are updated, get
+vertex "B" from the graph, the distance marker of vertex "B" should be the minimum number of links between the two actors.
 
 -------------------------------------
 
 Problem 2 (21 pts)
 
-Consider the recursive algorithm below for finding the
-shortest weighted path in an acyclic graph, from s to t.
+Consider the recursive algorithm below for finding the shortest weighted path in an acyclic graph, from s to t.
 
 (a) Why does this algorithm not work for general graphs?
 
 A:
 
+This algorithm doesn't work for general graphs because if the given graph contains cycles, then the recursion will be stuck
+in a cycle as well: for example, shortest(a,t) calls shortest(b,t) which calls shortest(c,t) which calls shortest(a,t) again,
+which would not move towards the base case.
+
 (b) Explain why this algorithm is guaranteed to terminate for acyclic graphs.
 
 A:
+
+Since the target graph is acyclic, the recursive calls would not get stuck in a cycle. By doing shortest() and examining
+the adjacent vertices and selecting the lowest cost of theirs to update tmp, the recursions are always moving towards the
+target, making progress towards the base case, and thus is guaranteed to terminate.
 
 (c) What is the worst-case running time of the algorithm?
 
 A:
 
+The worst case is when every two vertices in the graph have an edge between them, and that they can all get to vertex t
+in the end. In that case, for every vertex, roughly O(|V|) recursions would take place, which means the running time would
+be O(|V|^|V|), and since |E| = (|V|(|V|-1))/2, the running time should be O(|E|^(|V|/2)) = O(|E|^|V|) which is exponential.
