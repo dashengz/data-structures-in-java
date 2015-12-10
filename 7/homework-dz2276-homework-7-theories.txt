@@ -62,8 +62,15 @@ A:
 
 Actor 1: vertex "A"; Actor 2: vertex "B"
 
-Do the breadth-first search starting from vertex "A", and after the markers of the vertices are updated, get vertex "B"
-from the graph, the distance marker of vertex "B" should be the minimum number of links between the two actors.
+1) If "the minimum number of links between two arbitrary actors" means adding the Bacon number of the two together (they
+can't link together without going through vertex "Kevin Bacon" first): Do the breadth-first search starting from vertex
+"Kevin Bacon", and after the markers of the vertices are updated, get vertex "A" and "B" from the graph, the sum of their
+distance markers should be the minimum number of links between the two actors.
+
+2) If "the minimum number of links between two arbitrary actors" means the direct shortest path from the two (they don't
+have to go through vertex "Kevin Bacon" first): Do the breadth-first search starting from vertex "A", and after the markers
+of the vertices are updated, get vertex "B" from the graph, the distance marker of vertex "B" should be the minimum number
+of links between the two actors.
 
 -------------------------------------
 
