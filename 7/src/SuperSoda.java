@@ -19,6 +19,6 @@ public class SuperSoda {
     double[] costs = new double[] { 0.8, 4, 7.5, 14, 20 };
     System.out.println(minimalSodaCost(sodaSizes, costs, 100));
     System.out.println(maximumSodaNumber(sodaSizes, costs, 56.0));
-    // System.out.println(Arrays.toString(minimalSodaCostCombinations(sodaSizes, costs, 105)));
+     System.out.println(Arrays.toString(minimalSodaCostCombinations(sodaSizes, costs, 105)));
   }
 }

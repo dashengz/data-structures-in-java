@@ -7,29 +7,63 @@ Homework 7
 
 Problem 1 (21 pts)
 
-The object of the Kevin Bacon Game is to link a movie actor to Kevin
-Bacon via shared movie roles. The minimum number of links is an
-actor’s Bacon number. For instance, Tom Hanks has a Bacon number of 1;
-he was in Apollo 13 with Kevin Bacon. Sally Field has a Bacon number
-of 2, because she was in Forrest Gump with Tom Hanks, who was in
-Apollo 13 with Kevin Bacon. Almost all well-known actors have a Bacon
-number of 1 or 2. Assume that you have a comprehensive list of of (Actor, Movie) pairs.
+The object of the Kevin Bacon Game is to link a movie actor to Kevin Bacon via shared movie roles. The minimum number
+of links is an actor’s Bacon number. For instance, Tom Hanks has a Bacon number of 1; he was in Apollo 13 with Kevin
+Bacon. Sally Field has a Bacon number of 2, because she was in Forrest Gump with Tom Hanks, who was in Apollo 13 with
+Kevin Bacon. Almost all well-known actors have a Bacon number of 1 or 2. Assume that you have a comprehensive list
+of (Actor, Movie) pairs.
 
-  - (a) Explain how to find an actor’s Bacon number.
+(a) Explain how to find an actor’s Bacon number.
 
-  A:
+A:
+
+First, we need to construct a graph based on the (Actor, Movie) pairs:
+    Go through every pair:
+        add the Actor to the corresponding Movie set (if the Movie set doesn't exist then make a new set)
+            eg. Kevin Bacon will be added to the Apollo 13 set
+        add the Actor to an Actor set (no duplicate allowed)
+    Go through the Actor set and make each element a vertex in the graph;
+    Go through each Movie set:
+        for each two actors, add an undirected unweighted edge between the two in the graph;
+
+With the graph, we can do breadth-first search using a queue (eg. a linked list), starting from the vertex "Kevin Bacon",
+update visited, back pointer and distance markers of adjacent vertices (like what we did in hw6's doBfs()).
+
+And then after the markers of the vertices (that can be reached from Kevin Bacon) are updated, we can find the target actor's
+Bacon number by accessing the actor's distance marker. (According to oracleofbacon.org, about 12% of all actors cannot
+be linked to the rest of the movie universe, and their Bacon number would be infinite.)
+
+(b) Explain how to find the actor with the highest Bacon number.
+
+A:
+
+Do the breadth-first search starting from vertex "Kevin Bacon", and after the markers of the vertices are updated:
+
+    There will be actors who have an infinite Bacon number, because they are not reachable from vertex "Kevin Bacon".
+    Assuming we are finding the actor with the highest finite Bacon number:
+
+    Vertex max = graph.getVertex("Kevin Bacon");
+    max.cost = 0;
+    for (Vertex v : graph.vertices.values()) {
+        if (v.cost > max.cost) {
+            max.cost = v.cost;
+        }
+    }
+
+    Then we'll know what the highest Bacon number is.
+
+    And then we go through the vertices again, find all the vertices that has the cost of max.cost,
+    They are the actors with the highest Bacon number.
 
 
-  - (b) Explain how to find the actor with the highest Bacon number.
+(c) Explain how to find the minimum number of links between two arbitrary actors.
 
-  A:
+A:
 
+Actor 1: vertex "A"; Actor 2: vertex "B"
 
-  - (c) Explain how to find the minimum number of links between two arbitrary actors.
-
-  A:
-
-
+Do the breadth-first search starting from vertex "A", and after the markers of the vertices are updated, get vertex "B"
+from the graph, the distance marker of vertex "B" should be the minimum number of links between the two actors.
 
 -------------------------------------
 
@@ -38,17 +72,15 @@ Problem 2 (21 pts)
 Consider the recursive algorithm below for finding the
 shortest weighted path in an acyclic graph, from s to t.
 
-  - (a) Why does this algorithm not work for general graphs?
+(a) Why does this algorithm not work for general graphs?
 
-  A:
+A:
 
+(b) Explain why this algorithm is guaranteed to terminate for acyclic graphs.
 
-  - (b) Explain why this algorithm is guaranteed to terminate for acyclic graphs.
+A:
 
-  A:
+(c) What is the worst-case running time of the algorithm?
 
-
-  - (c) What is the worst-case running time of the algorithm?
-
-  A:
+A:
 
