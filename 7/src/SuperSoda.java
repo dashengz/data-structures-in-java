@@ -4,6 +4,13 @@ import java.util.LinkedList;
 
 public class SuperSoda {
 
+  /**
+   * Calculate Minimal Soda Cost with a given bottle size.
+   *
+   * Running time:
+   * Since the sodaSizes.length can be considered as a constant here in this case,
+   * T(N) = O(sodaSizes.length * N) = O(N)
+   */
   public static double minimalSodaCost(int[] sodaSizes, double[] costs, int n) {
     // Caching results
     double[] minCosts = new double[n+1];
@@ -35,6 +42,13 @@ public class SuperSoda {
     return minCosts[n];
   }
 
+  /**
+   * Calculate Maximum Soda Number with a given amount of money.
+   *
+   * Running time:
+   * Since the sodaSizes.length and costs.length can be considered as a constant here in this case,
+   * T(N) = O(sodaSizes.length * N) = O(N)
+   */
   public static int maximumSodaNumber(int[] sodaSizes, double[] costs, double cost) {
     double maxCost = costs[0];
     int maxSize = sodaSizes[0];
@@ -44,7 +58,6 @@ public class SuperSoda {
         maxSize = sodaSizes[i];
       }
     }
-    // System.out.println(maxCost + " " + maxSize);
 
     int guess = (int) (cost / maxCost + 1) * maxSize;
 
