@@ -100,6 +100,19 @@ public class Graph {
     }
   }
 
+  /**
+   * NOT part of Homework 6
+   * To get the MAXIMUM spanning tree
+   * Multiplying the edge weights by -1 and then do Prim's algorithm
+   */
+  public void reverseAllCosts() {
+    for (Vertex v : vertices.values()) {
+      for (Edge e : v.getEdges()) {
+        if (e.cost > 0) e.cost *= -1;
+      }
+    }
+  }
+
   /** BFS */
   public void doBfs(String s) {
     LinkedList<Vertex> bfsQ = new LinkedList<>();
