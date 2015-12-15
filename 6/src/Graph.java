@@ -225,6 +225,9 @@ public class Graph {
   /** Prim's */
   public void doPrim(String s) {
     PriorityQueue<Pair> primPQ = new PriorityQueue<>();
+    // Lazier way of getting maximum spanning tree (than multiply by -1)
+    // use a max-heap instead of a min-heap
+    // PriorityQueue<Pair> primPQ = new PriorityQueue<>(Collections.reverseOrder());
     Vertex vertexS = getVertex(s);
     vertexS.cost = 0;
     vertexS.visited = true;
